@@ -1,12 +1,31 @@
 import { Link } from "react-router-dom"
-import data from "../data"
+
+import { useEffect, useState } from "react"
 
 const HomeScreen = () => {
+
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+    
+    const fetchProducts = async () => {
+      const url = "/api/products";
+      const response = await fetch(url)
+      const data = await response.json()
+
+      if(response.ok) {
+        setProducts(data)
+       
+      } 
+    }
+
+    fetchProducts()
+    
+  }, [])
     return (
         <div>
              <h1>Featured Products</h1>
         <div className="products">
-          {data.products.map((product) => (
+          {products.map((product) => (
             <div className="product" key={product.slug}>
               <Link to={`/product/${product.slug}`}>
                 <img src={product.image} alt={product.name} />

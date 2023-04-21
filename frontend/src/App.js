@@ -1,23 +1,37 @@
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
-
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen'
+import ProductScreen from './screens/ProductScreen';
 
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="d-flex flex-column site-container">
         <header>
-          <Link to="/">ShopEasy</Link>
+          
+          <Navbar bg="dark" variant="dark">
+            
+            <Container>
+              <LinkContainer to="/">
+                <Navbar.Brand>ShopEasy</Navbar.Brand>
+              </LinkContainer>
+            </Container>
+          </Navbar>
         </header>
-        <Routes>
-          <Route path='/product/:slug' element={<ProductScreen />} ></Route>
-          <Route path="/" element={<HomeScreen />}></Route>
-        </Routes>
-       
+        <main>
+          <Container>
+            <Routes>
+              <Route path="/product/:slug" element={<ProductScreen />}></Route>
+              <Route path="/" element={<HomeScreen />}></Route>
+            </Routes>
+          </Container>
+        </main>
+        <footer className="text-center">All rights Reserved</footer>
       </div>
     </BrowserRouter>
   );

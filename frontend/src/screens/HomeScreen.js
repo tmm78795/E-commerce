@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useEffect, useReducer } from 'react';
 
-import logger from 'use-reducer-logger';
+
 
 const reducer = (state, action) => {
   // eslint-disable-next-line default-case
@@ -22,7 +22,7 @@ const reducer = (state, action) => {
 };
 
 const HomeScreen = () => {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+  const [{ loading, error, products }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
     products: [],

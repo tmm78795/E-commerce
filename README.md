@@ -5,3 +5,5 @@
 1. Created React App
 2. React Route Added
 3. Express added as backend
+4. Added react bootstrap
+5. Added manual components

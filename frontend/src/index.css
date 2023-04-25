@@ -11,6 +11,15 @@ body {
   min-height: 100vh;
 }
 
+.rating span {
+  color: #ffc000;
+}
+
+.btn-primary {
+  background-color: #ffc000;
+  color: #000000;
+}
+
 main {
   flex: 1;
 }

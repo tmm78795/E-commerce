@@ -7,3 +7,4 @@
 3. Express added as backend
 4. Added react bootstrap
 5. Added custom components
+6. Product screen added

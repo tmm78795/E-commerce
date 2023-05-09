@@ -40,6 +40,8 @@ main {
   width: 100%;
 }
 
-.product-info {
-  padding: 2rem;
+
+
+.img-large {
+  max-width: 100%; 
 }

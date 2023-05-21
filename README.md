@@ -8,3 +8,4 @@
 4. Added react bootstrap
 5. Added custom components
 6. Product screen added
+7. updated components to show user Friendly error message

@@ -9,6 +9,9 @@ import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 
 import Rating from '../components/Rating';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { getError } from '../utilis';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,23 +32,29 @@ const ProductScreen = () => {
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     loading: true,
-    error: '',
+    error: null,
     product: [],
   });
 
   useEffect(() => {
     dispatch({ type: 'FETCH_REQUEST' });
     const fetchProduct = async () => {
+      let response, data;
       try {
         const url = `/api/products/slug/${slug}`;
-        const response = await fetch(url);
-        const data = await response.json();
+        response = await fetch(url);
+        data = await response.json();
 
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
         //console.log('run');
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: err });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
         //console.log('notrun');
+      }
+
+      if (response.ok) {
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } else {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(data) });
       }
     };
 
@@ -53,9 +62,9 @@ const ProductScreen = () => {
   }, [slug]);
 
   return loading ? (
-    <div>...Loading</div>
+    <LoadingBox />
   ) : error ? (
-    <div>{error}</div>
+    <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div className="product-Info">
       <Row>

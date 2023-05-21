@@ -1,8 +1,12 @@
 import { useEffect, useReducer } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Helmet } from 'react-helmet-async';
 
 import Product from '../components/Product';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { getError } from '../utilis';
 
 const reducer = (state, action) => {
   // eslint-disable-next-line default-case
@@ -30,14 +34,19 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch({ type: 'FETCH_REQUEST' });
     const fetchProducts = async () => {
+      let response, data;
       try {
         const url = '/api/products';
-        const response = await fetch(url);
-        const data = await response.json();
-
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+        response = await fetch(url);
+        data = await response.json();
       } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: err });
+        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
+
+      if (response.ok) {
+        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+      } else {
+        dispatch({ type: 'FETCH_FAIL', payload: getError(data) });
       }
     };
 
@@ -45,12 +54,15 @@ const HomeScreen = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>ShopEasy</title>
+      </Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {loading ? (
-          <div>Loading....</div>
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <Row>
             {products.map((product) => (

@@ -9,3 +9,4 @@
 5. Added custom components
 6. Product screen added
 7. updated components to show user Friendly error message
+8. Added React Context to enable add to cart functionality

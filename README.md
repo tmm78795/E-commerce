@@ -10,3 +10,5 @@
 6. Product screen added
 7. updated components to show user Friendly error message
 8. Added React Context to enable add to cart functionality
+
+9. cart enhancement - added functionality that will increase quantity of product instead adding duplicate product when same product added multiple times.

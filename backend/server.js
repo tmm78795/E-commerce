@@ -10,9 +10,17 @@ app.get('/api/products', (req, res) => {
 app.get('/api/products/slug/:slug', (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
 
-  product? res.send(product) 
-  : res.status(404).send({message: "Product not found"})
-  
+  product
+    ? res.send(product)
+    : res.status(404).send({ message: 'Product not found' });
+});
+
+app.get('/api/products/:id', (req, res) => {
+  const product = data.products.find((x) => x._id == req.params.id);
+
+  product
+    ? res.send(product)
+    : res.status(404).send({ message: 'Product not found' });
 });
 
 const port = process.env.PORT || 5000;

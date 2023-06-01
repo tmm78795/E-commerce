@@ -12,6 +12,7 @@ import ProductScreen from './screens/ProductScreen';
 import './App.css';
 
 import { Store } from './Store';
+import { CartScreen } from './screens/CartScreen';
 
 function App() {
   const { state } = useContext(Store);
@@ -42,6 +43,7 @@ function App() {
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />}></Route>
+              <Route path="/cart" element={<CartScreen />}></Route>
               <Route path="/" element={<HomeScreen />}></Route>
             </Routes>
           </Container>

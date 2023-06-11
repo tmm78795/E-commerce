@@ -35,8 +35,8 @@ export const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    navigate('/sign?redirect=/shipping');
-  }
+    navigate('/signIn?redirect=/shipping');
+  };
 
   return (
     <div>
@@ -108,17 +108,18 @@ export const CartScreen = () => {
             <Card>
               <Card.Body>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>
+                  <ListGroup.Item key={'hhh'}>
                     <h3>
                       Subtotal:({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
                       items) ${' '}
                       {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                     </h3>
                   </ListGroup.Item>
-                  <ListGroup.Item>
+                  <ListGroup.Item key={'hhhhh'}>
                     <div className="d-grid">
-                      <Button variant="primary"
-                      onClick={checkoutHandler}>Go to Checkout</Button>
+                      <Button variant="primary" onClick={checkoutHandler}>
+                        Go to Checkout
+                      </Button>
                     </div>
                   </ListGroup.Item>
                 </ListGroup>

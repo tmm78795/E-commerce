@@ -2,13 +2,13 @@ import { useEffect, useReducer } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Helmet } from 'react-helmet-async';
-import { useContext } from 'react';
+
 
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utilis';
-import { Store } from '../Store';
+
 
 const reducer = (state, action) => {
   // eslint-disable-next-line default-case

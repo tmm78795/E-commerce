@@ -25,3 +25,5 @@
 13. Created User Model and installed bcryptjs package to encrypt user passwords
 
 14. Added User Router and jsonwebtoken functionality
+
+15. Added validation for SignIn & storing user info in local storage

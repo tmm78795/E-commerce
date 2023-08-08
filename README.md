@@ -27,3 +27,5 @@
 14. Added User Router and jsonwebtoken functionality
 
 15. Added validation for SignIn & storing user info in local storage
+
+16. Added react-toastify module for better visual error in Sign In page

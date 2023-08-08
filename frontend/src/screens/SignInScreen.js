@@ -4,7 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Store } from '../Store';
+import { getError } from '../utilis';
 
 export const SignInScreen = () => {
   const navigate = useNavigate();
@@ -16,36 +18,38 @@ export const SignInScreen = () => {
   const redirect = redirectURL ? redirectURL : '/';
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
-const {userInfo} = state;
+  const { userInfo } = state;
   const submitHandler = async (e) => {
     e.preventDefault();
     //console.log(JSON.stringify({ email: email, password: password }));
-
-    const res = await fetch('/api/users/signin', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    });
-
-    if (res.status !== 200) {
-      
-      alert('Invalid email or password');
-      return;
+    let res, data;
+    try {
+      res = await fetch('/api/users/signin', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+      data = await res.json();
+    } catch (err) {
+      toast.error(getError(err));
     }
 
-   const data = await res.json();
-    ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-    localStorage.setItem('userInfo', JSON.stringify(data));
-    navigate(redirect || '/');
+    if (res.ok) {
+      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      navigate(redirect || '/');
+    } else {
+      toast.error(getError(data));
+    }
   };
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      navigate(redirect);
     }
-  }, [userInfo, navigate, redirect])
+  }, [userInfo, navigate, redirect]);
 
   return (
     <Container className="small-container">

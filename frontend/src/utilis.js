@@ -1,3 +1,6 @@
 export const getError = (error) => {
-  return error.message ? error.message : 'Error Occured';
+  if (error !== undefined ) return error.message ? error.message : 'Error Occured';
+  else {
+    return 'Error Occured';
+  }
 };

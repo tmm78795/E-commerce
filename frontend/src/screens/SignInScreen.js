@@ -38,7 +38,7 @@ export const SignInScreen = () => {
 
     if (res.ok) {
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      sessionStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
     } else {
       toast.error(getError(data));

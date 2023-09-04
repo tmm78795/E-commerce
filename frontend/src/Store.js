@@ -3,13 +3,17 @@ import { createContext, useReducer } from 'react';
 export const Store = createContext();
 
 const initialState = {
-  userInfo: localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo'))
+  userInfo: sessionStorage.getItem('userInfo')
+    ? JSON.parse(sessionStorage.getItem('userInfo'))
     : null,
 
   cart: {
     shippingAddress: localStorage.getItem('shippingAddress')
       ? JSON.parse(localStorage.getItem('shippingAddress'))
+      : {},
+
+    PaymentMethod: localStorage.getItem('paymentMethod')
+      ? JSON.parse(localStorage.getItem('paymentMethod'))
       : {},
 
     cartItems: localStorage.getItem('cartItems')
@@ -49,12 +53,15 @@ const reducer = (state, action) => {
     }
 
     case 'USER_SIGNOUT': {
+      localStorage.clear();
+      sessionStorage.clear();
       return {
         ...state,
         userInfo: null,
         cart: {
           cartItems: [],
           shippingAddress: {},
+          paymentMethod: '',
         },
       };
     }
@@ -67,6 +74,14 @@ const reducer = (state, action) => {
           ...state.cart,
           shippingAddress: action.payload,
         },
+      };
+    }
+
+    case 'SAVE_PAYMENT_METHOD': {
+      localStorage.setItem('paymentMethod', JSON.stringify(action.payload));
+      return {
+        ...state,
+        cart: { ...state.cart, paymentMethod: action.payload },
       };
     }
 

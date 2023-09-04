@@ -33,3 +33,5 @@
 17. Added Shipping screen and CheckoutSteps component. Also updated store.js, index.css and store.js
 
 18. Added SignUp screen in frontend and signup route in backend
+
+19. Added PaymentMethod Screen.

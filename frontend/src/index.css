@@ -40,12 +40,20 @@ main {
   width: 100%;
 }
 
-
-
 .img-large {
-  max-width: 100%; 
+  max-width: 100%;
 }
 
 .img-thumbnail {
   height: 80px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid grey;
+  color: grey;
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid orange;
+  color: orange;
 }

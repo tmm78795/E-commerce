@@ -29,3 +29,7 @@
 15. Added validation for SignIn & storing user info in local storage
 
 16. Added react-toastify module for better visual error in Sign In page
+
+17. Added Shipping screen and CheckoutSteps component. Also updated store.js, index.css and store.js
+
+

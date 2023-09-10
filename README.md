@@ -35,3 +35,5 @@
 18. Added SignUp screen in frontend and signup route in backend
 
 19. Added PaymentMethod Screen.
+
+20. Order Summary (PlaceOrderScreen) added in Frontend.

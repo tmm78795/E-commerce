@@ -37,3 +37,9 @@
 19. Added PaymentMethod Screen.
 
 20. Order Summary (PlaceOrderScreen) added in Frontend.
+
+20. Order Model, Router and isAuth middleware created. Added Fetch post in PlaceOrderScreen to save order
+
+
+
+

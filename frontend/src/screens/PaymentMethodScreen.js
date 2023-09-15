@@ -10,7 +10,7 @@ export default function PaymentMethodScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
-  console.log(state);
+  // console.log(state);
 
   const {
     userInfo,
@@ -33,7 +33,7 @@ export default function PaymentMethodScreen() {
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: PaymentMethodName });
-
+    
     navigate('/placeorder');
   };
 

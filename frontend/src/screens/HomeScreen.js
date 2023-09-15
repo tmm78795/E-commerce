@@ -41,6 +41,7 @@ const HomeScreen = () => {
         const url = '/api/products';
         response = await fetch(url);
         data = await response.json();
+        // console.log((data))
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }

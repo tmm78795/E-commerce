@@ -16,15 +16,13 @@ export const generateToken = (user) => {
 };
 
 export const isAuth = (req, res, next) => {
- 
-  //console.log('reached')
   const authorization = req.headers.authorization;
   //console.log(authorization);
 
   const arr = authorization && authorization.split(' ');
-  const token = arr[1]
-  
-  console.log(typeof(token));
+  const token = arr[1];
+
+  //console.log(typeof(token));
   // try {const token = authorization && authorization.split(' ', 1);}
   // catch(err) {res.send}
   if (!token) {
@@ -32,14 +30,14 @@ export const isAuth = (req, res, next) => {
   } else {
     //console.log('in');
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      
       if (err) {
         res
           .status(403)
           .send({ message: 'Could not verify user, Invalid Token' });
       } else {
         //console.log('in2');
-        (req.user = user); next();
+        req.user = user;
+        next();
       }
     });
   }

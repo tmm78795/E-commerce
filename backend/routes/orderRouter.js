@@ -24,15 +24,34 @@ orderRouter.post(
     //console.log(newOrder);
     try {
       const order = await newOrder.save();
-      console.log(order)
+      res.status(201).send({ message: 'Order Placed', order });
     }
     catch (err) {
-      console.log(err)
+      res.status(404).send({message:"Could not place order"})
     }
-    const order = await newOrder.save();
-    //console.log("in4");
-    res.status(201).send({ message: 'Order Placed', order });
+    
+    
+    
   })
+)
+
+
+  orderRouter.get(
+    '/:id',
+    isAuth,
+    expressAsyncHandler(async (req, res) => {
+
+      // console.log(req.params.id);
+      const order = await Order.findById(req.params.id);
+
+      if(order) {
+        res.send(order)
+      }
+      else {
+        res.status(404).send({message:"Not found"});
+      }
+      
+    })
 );
 
 export default orderRouter;

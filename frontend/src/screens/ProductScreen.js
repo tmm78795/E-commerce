@@ -35,7 +35,7 @@ const ProductScreen = () => {
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     loading: true,
     error: null,
-    product: [],
+    product: {},
   });
 
   useEffect(() => {

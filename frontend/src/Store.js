@@ -53,6 +53,8 @@ const reducer = (state, action) => {
     }
 
     case 'USER_SIGNOUT': {
+      // const redirectURL = new URLSearchParams(search).get('redirect');
+      // const redirect = redirectURL ? redirectURL : '/';
       localStorage.clear();
       localStorage.clear();
       return {
@@ -67,7 +69,8 @@ const reducer = (state, action) => {
     }
 
     case 'CART_CLEAR': {
-      return { ...state, cart: { ...state.cart, cartItems: [] } };
+      localStorage.removeItem('cartItems')
+      return { ...state, cart: { ...state.cart, cartItems:[] } };
     }
 
     case 'ADD_SHIPPING_ADDRESS': {

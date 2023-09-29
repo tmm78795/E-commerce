@@ -69,9 +69,9 @@ export default function PlaceOrderScreen() {
         },
       });
       data = await res.json();
-      ctxDispatch('CART_CLEAR');
-      localStorage.removeItem('cartItems');
-      dispatch('SUCCESS_REQUEST');
+
+      ctxDispatch({ type: 'CART_CLEAR' });
+      dispatch({ type: 'SUCCESS_REQUEST' });
       navigate(`/order/${data.order._id}`);
     } catch (err) {
       dispatch('FAIL_REQUEST');
@@ -83,7 +83,7 @@ export default function PlaceOrderScreen() {
     if (!cart.PaymentMethod) {
       navigate('/payment');
     }
-  }, [cart,navigate]);
+  }, [cart, navigate]);
 
   return (
     <div>

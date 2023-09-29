@@ -40,6 +40,6 @@
 
 20. Order Model, Router and isAuth middleware created. Added Fetch post in PlaceOrderScreen to save order
 
-
+21. Added OrderScreen and route for particular order by Id.
 
 

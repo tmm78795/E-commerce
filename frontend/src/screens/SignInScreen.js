@@ -18,7 +18,10 @@ export const SignInScreen = () => {
   const redirect = redirectURL ? redirectURL : '/';
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { userInfo } = state;
+  const {
+    userInfo,
+    cart: { cartItems },
+  } = state;
   const submitHandler = async (e) => {
     e.preventDefault();
     //console.log(JSON.stringify({ email: email, password: password }));
@@ -39,7 +42,12 @@ export const SignInScreen = () => {
     if (res.ok) {
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      // console.log(redirect)
+      if (cartItems.length === 0) {
+        navigate('/');
+      } else {
+        navigate(redirect || '/');
+      }
     } else {
       toast.error(getError(data));
     }

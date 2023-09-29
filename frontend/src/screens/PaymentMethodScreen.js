@@ -31,10 +31,10 @@ export default function PaymentMethodScreen() {
   );
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: PaymentMethodName });
     
-    navigate('/placeorder');
+    e.preventDefault();
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: PaymentMethodName }); 
+    navigate('/placeorder')
   };
 
   return (

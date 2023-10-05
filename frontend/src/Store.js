@@ -69,8 +69,9 @@ const reducer = (state, action) => {
     }
 
     case 'CART_CLEAR': {
-      localStorage.removeItem('cartItems')
-      return { ...state, cart: { ...state.cart, cartItems:[] } };
+      localStorage.removeItem('cartItems');
+      localStorage.removeItem('paymentMethod');
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
     }
 
     case 'ADD_SHIPPING_ADDRESS': {

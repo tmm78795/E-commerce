@@ -35,7 +35,7 @@ export default function PlaceOrderScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
   const { cart, userInfo } = state;
-  const { cartItems, shippingAddress, PaymentMethod } = cart;
+  const { cartItems, shippingAddress, paymentMethod } = cart;
 
   cart.itemsPrice = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
 
@@ -53,7 +53,7 @@ export default function PlaceOrderScreen() {
       const body = {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.PaymentMethod,
+        paymentMethod: cart.paymentMethod,
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
@@ -74,13 +74,13 @@ export default function PlaceOrderScreen() {
       dispatch({ type: 'SUCCESS_REQUEST' });
       navigate(`/order/${data.order._id}`);
     } catch (err) {
-      dispatch('FAIL_REQUEST');
+      dispatch({type: 'FAIL_REQUEST'});
       toast.error(getError(err));
     }
   };
 
   useEffect(() => {
-    if (!cart.PaymentMethod) {
+    if (!cart.paymentMethod) {
       navigate('/payment');
     }
   }, [cart, navigate]);
@@ -116,7 +116,7 @@ export default function PlaceOrderScreen() {
 
               <p>
                 <b>Method: </b>
-                {PaymentMethod}
+                {paymentMethod}
               </p>
 
               <Link to="/payment">Edit</Link>

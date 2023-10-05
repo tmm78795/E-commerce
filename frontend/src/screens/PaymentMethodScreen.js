@@ -13,28 +13,24 @@ export default function PaymentMethodScreen() {
   // console.log(state);
 
   const {
-    userInfo,
-    cart: { shippingAddress, PaymentMethod },
+    cart: { shippingAddress, paymentMethod },
   } = state;
 
+
+  const [PaymentMethodName, setPaymentMethodName] = useState(
+    paymentMethod || 'Paypal'
+  );
+
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/signin?redirect=/payment');
-    }
     if (!shippingAddress.address) {
       navigate('/shipping');
     }
-  }, [userInfo, shippingAddress, navigate]);
-
-  const [PaymentMethodName, setPaymentMethodName] = useState(
-    PaymentMethod || 'Paypal'
-  );
+  }, [shippingAddress, navigate]);
 
   const submitHandler = (e) => {
-    
     e.preventDefault();
-    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: PaymentMethodName }); 
-    navigate('/placeorder')
+    ctxDispatch({ type: 'SAVE_PAYMENT_METHOD', payload: PaymentMethodName });
+    navigate('/placeorder');
   };
 
   return (
@@ -48,27 +44,30 @@ export default function PaymentMethodScreen() {
         <h1>Payment Method:</h1>
 
         <Form onSubmit={submitHandler}>
-          <Form.Check
-            className="mb-3"
-            type="radio"
-            label="Paypal"
-            id="Paypal"
-            value="Paypal"
-            checked={PaymentMethodName === 'Paypal'}
-            onChange={(e) => setPaymentMethodName(e.target.value)}
-          ></Form.Check>
-
-          <Form.Check
-            className="mb-3"
-            type="radio"
-            label="Stripe"
-            id="Stripe"
-            value="Stripe"
-            checked={PaymentMethodName === 'Stripe'}
-            onChange={(e) => setPaymentMethodName(e.target.value)}
-          ></Form.Check>
-
+          <div className="mb-3">
+            <Form.Check
+              type="radio"
+              label="Paypal"
+              id="Paypal"
+              value="Paypal"
+              checked={PaymentMethodName === 'Paypal'}
+              onChange={(e) => setPaymentMethodName(e.target.value)}
+            ></Form.Check>
+          </div>
+          <div className="mb-3">
+            <Form.Check
+              className="mb-3"
+              type="radio"
+              label="Stripe"
+              id="Stripe"
+              value="Stripe"
+              checked={PaymentMethodName === 'Stripe'}
+              onChange={(e) => setPaymentMethodName(e.target.value)}
+            ></Form.Check>
+          </div>
+          <div className='mb-3'>
           <Button type="submit">Continue</Button>
+          </div>
         </Form>
       </div>
     </div>

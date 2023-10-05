@@ -25,33 +25,51 @@ orderRouter.post(
     try {
       const order = await newOrder.save();
       res.status(201).send({ message: 'Order Placed', order });
+    } catch (err) {
+      res.status(404).send({ message: 'Could not place order' });
     }
-    catch (err) {
-      res.status(404).send({message:"Could not place order"})
-    }
-    
-    
-    
   })
-)
+);
 
+orderRouter.get(
+  '/:id',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    // console.log(req.params.id);
+    const order = await Order.findById(req.params.id);
 
-  orderRouter.get(
-    '/:id',
-    isAuth,
-    expressAsyncHandler(async (req, res) => {
+    if (order) {
+      // console.log(typeof order);
+      res.send(order);
+    } else {
+      res.status(404).send({ message: 'Not found' });
+    }
+  })
+);
 
-      // console.log(req.params.id);
-      const order = await Order.findById(req.params.id);
+orderRouter.put(
+  '/:id/pay',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const orderDetails = req.body;
+    const order = await Order.findById(id);
+    if (order) {
+      (order.isPaid = true), (order.paidAt = Date.now());
+      order.paymentResult = {
+        id: orderDetails.id,
+        status: orderDetails.status,
+        update_time: orderDetails.update_time,
+        email_address: orderDetails.email_address,
+      };
 
-      if(order) {
-        res.send(order)
-      }
-      else {
-        res.status(404).send({message:"Not found"});
-      }
-      
-    })
+      const updatedOrder = await order.save();
+
+      res.send({ message: 'Order Paid Successfully!', order: updatedOrder });
+    } else {
+      res.status(404).send({ message: 'Order not found!' });
+    }
+  })
 );
 
 export default orderRouter;

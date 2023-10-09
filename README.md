@@ -38,10 +38,12 @@
 
 20. Order Summary (PlaceOrderScreen) added in Frontend.
 
-20. Order Model, Router and isAuth middleware created. Added Fetch post in PlaceOrderScreen to save order
+21. Order Model, Router and isAuth middleware created. Added Fetch post in PlaceOrderScreen to save order
 
-21. Added OrderScreen and route for particular order by Id.
+22. Added OrderScreen and route for particular order by Id.
 
-22. Added Paypal package and pay by PayPal functionality.
+23. Added Paypal package and pay by PayPal functionality.
 
-23. Added order histroy screen and its route in backend.
+24. Added order histroy screen and its route in backend.
+
+25. Added ProfileScreen and backend route to view and update profile.

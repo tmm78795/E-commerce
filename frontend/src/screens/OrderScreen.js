@@ -89,6 +89,8 @@ export default function OrderScreen() {
         });
         const data = await res.json();
 
+
+
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Order is paid!');
       } catch (err) {
@@ -113,11 +115,14 @@ export default function OrderScreen() {
         const data = await res.json();
 
         if (!res.ok) {
-          dispatch({ type: 'REQUEST_FAIL', payload: getError(data) });
+          console.log("hi")
+          dispatch({ type: 'REQUEST_FAIL', payload: data });
         } else {
+          console.log("hi")
           dispatch({ type: 'REQUEST_SUCCESS', payload: data });
         }
       } catch (err) {
+        console.log("hi")
         dispatch({ type: 'REQUEST_FAIL', payload: err });
       }
     };

@@ -42,4 +42,6 @@
 
 21. Added OrderScreen and route for particular order by Id.
 
+22. Added Paypal package and pay by PayPal functionality.
 
+23. Added order histroy screen and its route in backend.

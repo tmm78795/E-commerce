@@ -31,18 +31,33 @@ orderRouter.post(
   })
 );
 
+orderRouter.get('/mine', isAuth, expressAsyncHandler(async(req, res) => {
+    const orders = await Order.find({user:req.user._id})
+   
+      res.send(orders)
+  
+
+}))
+
 orderRouter.get(
   '/:id',
   isAuth,
   expressAsyncHandler(async (req, res) => {
     // console.log(req.params.id);
-    const order = await Order.findById(req.params.id);
+    // const order = await Order.findById(req.params.id);
 
-    if (order) {
-      // console.log(typeof order);
+    // if (order) {
+    //   // console.log(typeof order);
+    //   res.send(order);
+    // } else {
+    //   res.status(404).send({ message: 'Not found' });
+    // }
+    try {
+      const order = await Order.findById(req.params.id);
       res.send(order);
-    } else {
-      res.status(404).send({ message: 'Not found' });
+    }
+    catch (err) {
+      res.status(404).send({ message: 'Not found' })
     }
   })
 );

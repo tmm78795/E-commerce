@@ -47,3 +47,5 @@
 24. Added order histroy screen and its route in backend.
 
 25. Added ProfileScreen and backend route to view and update profile.
+
+26. build react for production and attached mongo to atlas. Publish app to render.

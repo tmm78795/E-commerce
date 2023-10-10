@@ -1,0 +1,14 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "1. Created React App\r 2. React Route Added\r 3. Express added as backend\r 4. Added react bootstrap\r 5. Added custom components\r 6. Product screen added\r 7. updated components to show user Friendly error message\r 8. Added React Context to enable add to cart functionality",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build ",
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Store } from '../Store';
 import MessageBox from '../components/MessageBox';
-import Button from 'react-bootstrap/esm/Button';
+import Button from 'react-bootstrap/Button';
 
 export const CartScreen = () => {
   const navigate = useNavigate();
